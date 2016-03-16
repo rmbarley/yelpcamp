@@ -16,8 +16,11 @@ var commentRoutes = require("./routes/comments"),
   campgroundRoutes = require("./routes/campgrounds"),
   indexRoutes = require("./routes/index");
 
-//mongoose.connect("mongodb://localhost/yelp_camp");
-mongoose.connect("mongodb://ryan:pizzadog@ds015859.mlab.com:15859/yelpcamp_rmb");
+var port = process.env.PORT || 8080,
+  ip = process.env.IP;
+
+mongoose.connect(process.env.DATABASEURL);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -25,8 +28,6 @@ app.use(methodOverride("_method"));
 app.use(flash());
 // Seed the Database
 // seedDB();
-
-var port = process.env.PORT || 8080;
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -51,6 +52,6 @@ app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
-app.listen(port, function() {
-  console.log("YelpCamp is running on http://localhost:" + port + "!");
+app.listen(port, ip, function() {
+  console.log("YelpCamp is running on http://localhost:" + port);
 });
