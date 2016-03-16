@@ -55,5 +55,5 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
 app.listen(port, ip, function() {
-  console.log("YelpCamp is running on port " + port);
+  console.log("CampWise is running on port " + port);
 });
