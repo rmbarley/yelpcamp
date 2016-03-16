@@ -16,10 +16,12 @@ var commentRoutes = require("./routes/comments"),
   campgroundRoutes = require("./routes/campgrounds"),
   indexRoutes = require("./routes/index");
 
+// Set up environment variables
 var port = process.env.PORT || 8080,
-  ip = process.env.IP;
+  ip = process.env.IP,
+  db = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
 
-mongoose.connect(process.env.DATABASEURL);
+mongoose.connect(db);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -53,5 +55,5 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
 app.listen(port, ip, function() {
-  console.log("YelpCamp is running on http://localhost:" + port);
+  console.log("YelpCamp is running on port " + port);
 });
