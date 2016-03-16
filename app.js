@@ -25,6 +25,8 @@ app.use(flash());
 // Seed the Database
 // seedDB();
 
+var port = process.env.PORT || 8080;
+
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
   secret: "247176362  212982537 341748235 309902954",
@@ -48,6 +50,6 @@ app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
-app.listen(3000, function() {
-  console.log("The YelpCamp Server Has Started!");
+app.listen(port, function() {
+  console.log("YelpCamp is running on http://localhost:" + port + "!");
 });
